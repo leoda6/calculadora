@@ -1,37 +1,30 @@
-const display=document.querySelectorAll(".display");
-const botones=document.querySelectorAll(".btn");
 
-botones.forEach(boton=>{
-    boton.addEventListener("click",()=>{
-        const botonapretado = boton.textContent;
-        if(boton.id === "c"){
-            display.textContent="0";
-            return;
-        }
-        if(boton.id === "borrar"){
-            if(display.textContent.length === 1 || display.textContent === "error"){
-                display.textContent = "0";
-            }
-            else{
-                display.textContent=display.textContent.slice(0,-1);
-            return;
-            }
-            }
-        if(boton.id==="igual"){
-            try{
-                display.textContent=eval(display.textContent);
-            }catch{
-                display.textContent="error";
-            }
-            display.textContent=eval(display.textContent);
-            return;
-        }
+const display = document.querySelector('.display');
+const botones = document.querySelectorAll('.btn');
+const botonIgual = document.querySelector('#igual');
+const botonBorrar = document.querySelector('#borrar');
+const botonC = document.querySelector('#c');
+const botoncero=document.querySelector('#col-2');
 
-        if(display.textContent === "0" || display.textContent === "error"){
-          display.textContent = botonapretado; 
-        }
-        else{
-            display.textContent += botonapretado;
-        }
-    })
-})
+botones.forEach(function(boton) {
+  boton.addEventListener('click', function() {
+    const valor = boton.innerHTML;
+    display.innerHTML += valor;
+  });
+});
+
+botonIgual.addEventListener('click', function() {
+  const expresion = display.innerHTML;
+  const resultado = eval(expresion);
+  display.innerHTML = resultado;
+});
+
+botonBorrar.addEventListener('click', function() {
+  let expresion = display.innerHTML;
+  expresion = expresion.slice(0, -1);
+  display.innerHTML = expresion;
+});
+
+botonC.addEventListener('click', function() {
+  display.innerHTML = '';
+});
